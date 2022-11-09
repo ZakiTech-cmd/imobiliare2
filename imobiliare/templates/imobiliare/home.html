@@ -1,0 +1,29 @@
+{% extends 'imobiliare/main.html' %}
+{% load static %}
+{% block content %}
+<section>
+  <h1 class="section-title">APARTAMENTE</h1>
+  <div class="grid">
+    {% for announce in announces %}
+    <div class="card">
+    {% if announce.image %}
+      <img src="{{announce.image.url}}" alt="{{announce.title}}" />
+    {% endif %}
+      <div class="item-content">
+        <div>
+          <h2>{{announce.title}}</h2><br>
+          <h3>
+            {{announce.price}} €
+          </h3>
+        </div>
+        <div class="actions">
+          <a href="{% url 'announce_details' announce.id %}">Vizualizati
+            &#x2192</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock content %}

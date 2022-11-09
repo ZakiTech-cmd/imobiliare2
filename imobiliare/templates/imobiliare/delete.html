@@ -1,0 +1,16 @@
+{% extends 'imobiliare/main.html' %}
+
+{% block content %}
+
+<form method="POST" action="">
+    {% csrf_token %}
+    <div class="delete-card">
+        <p> Esti sigur ca doresti sa stergi anuntul "{{obj}}" ?</p>
+        <a href="{{request.META.HTTP_REFERER}}" class="delete-button"> Mergi inapoi</a>
+        <input type="submit" value="Confirm" class="delete-button"/>
+    </div>
+</form>
+
+
+
+{% endblock content %}

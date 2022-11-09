@@ -1,0 +1,31 @@
+{% extends 'imobiliare/main.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<div>
+{% if messages %}
+    <div class="messages">
+      <ul>
+        {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}<li class="error">{{ message }}</li>{% endif %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}<li class="success">{{ message }}</li>{% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="add-form card">
+                {% csrf_token %}
+            {{form|crispy}}
+            <input type="file"  name="image" multiple>
+            <button type="submit" class="button"> Adauga anunt</button>
+        </div>
+
+    </form>
+</div>
+
+
+{% endblock content %}

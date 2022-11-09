@@ -1,0 +1,54 @@
+{% extends 'imobiliare/main.html' %}
+{% load static %}
+{% block content%}
+<section>
+    <h1 class="section-title">{{announce.title}}</h1>
+    <div class="single-card">
+        <div class="card">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+  <div class="carousel-indicators">
+      {% for p in photos %}
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{forloop.counter0}}" class="{% if forloop.counter0 == 0 %} active {% endif %}" aria-current="true" aria-label="Slide 1"></button>
+      {% endfor %}
+  </div>
+  <div class="carousel-inner">
+      {% for p in photos %}
+    <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}">
+      <img src="{{p.image.url}}" class="d-block w-100" alt="...">
+    </div>
+      {% endfor %}
+
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+            <div class="item-content">
+                <div>
+                    <p><strong>{{announce.description}}</strong></p><br>
+                    <p>Etajul: <strong>{{announce.floor}}</strong> </p>
+                    <p>Judetul: <strong>{{announce.county}}</strong> </p>
+                    <p>Localitatea: <strong>{{announce.location}}</strong></p>
+                    <p>Data publicarii: <strong>{{announce.publish_date}}</strong></p>
+                    <p>Nr. Telefon: <strong>{{announce.phone_number}}</strong></p>
+                    <h3 class="price">
+                        Pretul: {{announce.price}} €
+                    </h3>
+                </div>
+                {% if request.user == announce.creator or request.user.is_superuser %}
+                <div class="card-actions">
+                    <a class="button" href="{% url 'update_announce' announce.id %}">Edit</a>
+                    <a class="button" href="{% url 'delete_announce' announce.id %}">Delete</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

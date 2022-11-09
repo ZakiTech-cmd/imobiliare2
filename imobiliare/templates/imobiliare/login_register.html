@@ -1,0 +1,60 @@
+{% extends 'imobiliare/main.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+{% if page == 'login' %}
+<section>
+  <h1 class="section-title">Intrare in cont</h1>
+  <form method="POST" action="" class="login-form card">
+    {% csrf_token %}
+    <input placeholder="Username" name="username" type="text" required />
+    <input placeholder="Parola" name="password" type="password" required />
+    {% if messages %}
+    <div class="messages">
+      <ul>
+        {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}<li class="error">{{ message }}</li>{% endif %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}<li class="success">{{ message }}</li>{% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    <div>
+      <button type="submit" class="button"> Intra in Cont</button>
+    </div>
+    <div class="margin-top">
+      <p>Inca nu ai un cont?</p>
+      <a href="{% url 'register' %}">Inregistreaza-te</a>
+    </div>
+  </form>
+</section>
+
+{% else %}
+
+<section>
+  <h1 class="section-title">Intrare in cont</h1>
+  <form method="POST" action="" class="login-form card">
+    {% csrf_token %}
+      {{form|crispy}}
+    {% if messages %}
+    <div class="messages">
+      <ul>
+        {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}<li class="error">{{ message }}</li>{% endif %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}<li class="success">{{ message }}</li>{% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    <div>
+      <button type="submit" class="button">Inregistreaza-te</button>
+    </div>
+    <div class="margin-top">
+      <p>Esti inregistrat?</p>
+      <a href="{% url 'login' %}">Intra in Cont</a>
+    </div>
+  </form>
+</section>
+{% endif %}
+
+{% endblock content %}

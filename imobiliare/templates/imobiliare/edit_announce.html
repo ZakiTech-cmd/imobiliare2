@@ -1,0 +1,18 @@
+{% extends 'imobiliare/main.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div>
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="add-form card">
+           {{form|crispy}}
+            <button type="submit" class="button"> Salveaza Anunt</button>
+        </div>
+    </form>
+</div>
+
+
+{% endblock content %}
