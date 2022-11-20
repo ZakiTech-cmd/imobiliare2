@@ -12,6 +12,9 @@ from .models import *
 from .forms import AnnounceForm
 from .forms import CreateUserForm
 from django.db.models import Q
+from django.views.generic import ListView
+from .tables import AnnounceTable
+from django_tables2 import SingleTableView
 
 
 # Create your views here.
@@ -23,11 +26,17 @@ class Home(View):
         return render(request, 'imobiliare/home.html', context)
 
 
+class AnnounceListView(SingleTableView):
+    model = Announce
+    table_class = AnnounceTable
+    template_name = 'imobiliare/calculator.html'
+
+
 class LoginPage(View):
 
     def get(self, request):
         context = {'page': 'login'}
-        return render(request, 'imobiliare/login_register.html', context)
+        return render(request, 'imobiliare/sign-in.html', context)
 
     def post(self, request):
         username = request.POST.get('username').lower()
@@ -37,7 +46,7 @@ class LoginPage(View):
             user = User.objects.get(username=username)
         except:
             messages.error(request, 'Utilizator inexistent')
-            return render(request, 'imobiliare/login_register.html', {'page': 'login'})
+            return render(request, 'imobiliare/sign-in.html', {'page': 'login'})
 
         user = authenticate(request, username=username, password=password)
 
@@ -61,7 +70,7 @@ class RegisterPage(View):
     success_message = "Your profile was created successfully"
     def get(self, request):
         form = CreateUserForm()
-        return render(request, 'imobiliare/login_register.html', {'page': 'register', 'form': form})
+        return render(request, 'imobiliare/sign-up.html', {'page': 'register', 'form': form})
 
     def post(self, request):
         form = CreateUserForm(request.POST)
@@ -73,7 +82,7 @@ class RegisterPage(View):
             return render(request, 'imobiliare/home.html', {'form': form})
         else:
             messages.error(request, form.errors)
-            return render(request, 'imobiliare/login_register.html')
+            return render(request, 'imobiliare/sign-up.html')
 
 
 class AnnounceDetails(View):

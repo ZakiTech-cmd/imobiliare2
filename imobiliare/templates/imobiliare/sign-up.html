@@ -1,0 +1,94 @@
+{% load crispy_forms_tags %}
+{% load static %}
+
+<html>
+<head>
+    <link href="{% static 'css/plugins.bundle.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/style.bundle.css'%}" rel="stylesheet" type="text/css" />
+</head>
+	<!--begin::Body-->
+	<body id="kt_body" class="bg-body">
+		<!--begin::Main-->
+		<!--begin::Root-->
+		<div class="d-flex flex-column flex-root">
+			<!--begin::Authentication - Sign-up -->
+			<div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url({% static 'img/background-header.jpg'%}">
+				<!--begin::Content-->
+				<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
+					<!--begin::Logo-->
+					<a href="{% url 'login' %}" class="mb-12">
+						<img alt="Logo" src="{% static 'media/logo-1.svg'%}" class="h-40px" />
+					</a>
+					<!--end::Logo-->
+					<!--begin::Wrapper-->
+					<div class="w-lg-600px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
+						<!--begin::Form-->
+						<form class="form w-100" id="kt_sign_up_form" method="POST">
+							<!--begin::Heading-->
+							<div class="mb-10 text-center">
+								<!--begin::Title-->
+								<h1 class="text-dark mb-3">Create an Account</h1>
+								<!--end::Title-->
+								<!--begin::Link-->
+								<div class="text-gray-400 fw-bold fs-4">Already have an account?
+                                      <a href="{% url 'login' %}" class="link-primary fw-bolder">Intra in Cont</a>
+                                </div>
+								<!--end::Link-->
+							</div>
+							<!--end::Heading-->
+							<div>
+                                {% csrf_token %}
+                                {{form|crispy}}
+                                {% if messages %}
+                                    <div class="messages">
+                                      <ul>
+                                        {% for message in messages %}
+                                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}<li class="error">{{ message }}</li>{% endif %}
+                                        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}<li class="success">{{ message }}</li>{% endif %}
+                                        {% endfor %}
+                                      </ul>
+                                    </div>
+                                {% endif %}
+								<!--begin::Hint-->
+								<div class="text-muted">Use 8 or more characters with a mix of letters, numbers &amp; symbols.</div>
+								<!--end::Hint-->
+							</div>
+							<!--end::Input group=-->
+							<!--begin::Input group-->
+							<div class="fv-row mb-10">
+								<label class="form-check form-check-custom form-check-solid form-check-inline">
+									<input class="form-check-input" type="checkbox" name="toc" value="1" />
+									<span class="form-check-label fw-bold text-gray-700 fs-6">I Agree
+									<a href="#" class="ms-1 link-primary">Terms and conditions</a>.</span>
+								</label>
+							</div>
+							<!--end::Input group-->
+							<!--begin::Actions-->
+							<div class="text-center">
+								<button type="submit" id="kt_sign_up_submit" class="btn btn-lg btn-primary">
+									<span class="indicator-label">Submit</span>
+								</button>
+							</div>
+							<!--end::Actions-->
+						</form>
+						<!--end::Form-->
+					</div>
+					<!--end::Wrapper-->
+				</div>
+				<!--end::Content-->
+			</div>
+			<!--end::Authentication - Sign-up-->
+		</div>
+		<!--end::Root-->
+		<!--end::Main-->
+		<!--begin::Javascript-->
+		<!--begin::Global Javascript Bundle(used by all pages)-->
+        <script src="{% static 'js/plugins.bundle.js'%}"></script>
+		<script src="{% static 'js/scripts.bundle.js'%}"></script>
+		<!--end::Global Javascript Bundle-->
+		<!--begin::Page Custom Javascript(used by this page)-->
+		<!--end::Page Custom Javascript-->
+		<!--end::Javascript-->
+	</body>
+	<!--end::Body-->
+</html>

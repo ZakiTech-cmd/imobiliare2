@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-mz958l735_g)yc@w_h%yh)t19t51b95r(w9fl_!j1mfp_shmdl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['imobiliare']
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'imobiliare.apps.ImobiliareConfig',
+    'django_tables2',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },

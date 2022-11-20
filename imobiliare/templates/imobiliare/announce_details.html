@@ -1,54 +1,225 @@
-{% extends 'imobiliare/main.html' %}
+{% extends 'imobiliare/index.html' %}
 {% load static %}
 {% block content%}
-<section>
-    <h1 class="section-title">{{announce.title}}</h1>
-    <div class="single-card">
-        <div class="card">
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-  <div class="carousel-indicators">
-      {% for p in photos %}
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{forloop.counter0}}" class="{% if forloop.counter0 == 0 %} active {% endif %}" aria-current="true" aria-label="Slide 1"></button>
-      {% endfor %}
-  </div>
-  <div class="carousel-inner">
-      {% for p in photos %}
-    <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}">
-      <img src="{{p.image.url}}" class="d-block w-100" alt="...">
-    </div>
-      {% endfor %}
+{#<section>#}
+{#    <div class="single-card">#}
+{#        <div class="card">#}
+{#        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">#}
+{#  <div class="carousel-indicators">#}
+{#      {% for p in photos %}#}
+{#    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{forloop.counter0}}" class="{% if forloop.counter0 == 0 %} active {% endif %}" aria-current="true" aria-label="Slide 1"></button>#}
+{#      {% endfor %}#}
+{#  </div>#}
+{#  <div class="carousel-inner">#}
+{#      {% for p in photos %}#}
+{#    <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}">#}
+{#      <img src="{{p.image.url}}" class="d-block w-100" alt="...">#}
+{#    </div>#}
+{#      {% endfor %}#}
+{##}
+{#  </div>#}
+{#  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">#}
+{#    <span class="carousel-control-prev-icon" aria-hidden="true"></span>#}
+{#    <span class="visually-hidden">Previous</span>#}
+{#  </button>#}
+{#  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">#}
+{#    <span class="carousel-control-next-icon" aria-hidden="true"></span>#}
+{#    <span class="visually-hidden">Next</span>#}
+{#  </button>#}
+{#</div>#}
+{#            <div class="item-content">#}
+{#                <div>#}
+{#                    <p><strong>{{announce.description}}</strong></p><br>#}
+{#                    <p>Etajul: <strong>{{announce.floor}}</strong> </p>#}
+{#                    <p>Judetul: <strong>{{announce.county}}</strong> </p>#}
+{#                    <p>Localitatea: <strong>{{announce.location}}</strong></p>#}
+{#                    <p>Data publicarii: <strong>{{announce.publish_date}}</strong></p>#}
+{#                    <p>Nr. Telefon: <strong>{{announce.phone_number}}</strong></p>#}
+{#                    <h3 class="price">#}
+{#                        Pretul: {{announce.price}} €#}
+{#                    </h3>#}
+{#                </div>#}
+{#                {% if request.user == announce.creator or request.user.is_superuser %}#}
+{#                <div class="card-actions">#}
+{#                    <a class="button" href="{% url 'update_announce' announce.id %}">Edit</a>#}
+{#                    <a class="button" href="{% url 'delete_announce' announce.id %}">Delete</a>#}
+{#                </div>#}
+{#                {% endif %}#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</section>#}
 
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-            <div class="item-content">
-                <div>
-                    <p><strong>{{announce.description}}</strong></p><br>
-                    <p>Etajul: <strong>{{announce.floor}}</strong> </p>
-                    <p>Judetul: <strong>{{announce.county}}</strong> </p>
-                    <p>Localitatea: <strong>{{announce.location}}</strong></p>
-                    <p>Data publicarii: <strong>{{announce.publish_date}}</strong></p>
-                    <p>Nr. Telefon: <strong>{{announce.phone_number}}</strong></p>
-                    <h3 class="price">
-                        Pretul: {{announce.price}} €
-                    </h3>
+
+
+    <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
+        <div class="card card-flush h-xl-100">
+                                <!--begin::Body-->
+            <div class="card-body py-9">
+                <!--begin::Row-->
+                <div class="row gx-9 h-100">
+                    <!--begin::Col-->
+                    <div class="col-sm-6 mb-10 mb-sm-0">
+                        <!--begin::Image-->
+                        <div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-400px min-h-sm-100 h-100">
+                           <div class="single-card">
+                               <div class="card">
+                                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+                                          <div class="carousel-indicators">
+                                              {% for p in photos %}
+                                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{forloop.counter0}}" class="{% if forloop.counter0 == 0 %} active {% endif %}" aria-current="true" aria-label="Slide 1"></button>
+                                              {% endfor %}
+                                          </div>
+                                          <div class="carousel-inner">
+                                              {% for p in photos %}
+                                            <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}">
+                                              <img src="{{p.image.url}}" class="d-block w-100" alt="...">
+                                            </div>
+                                              {% endfor %}
+
+                                          </div>
+                                          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                          </button>
+                                          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                          </button>
+                                    </div>
+                               </div>
+                           </div>
+                        </div>
+                    </div>
+                    <!--end::Col-->
+                    <!--begin::Col-->
+                    <div class="col-sm-6">
+                        <!--begin::Wrapper-->
+                        <div class="d-flex flex-column h-100">
+                            <!--begin::Header-->
+                            <div class="mb-7">
+                                <!--begin::Headin-->
+                                <div class="d-flex flex-stack mb-6">
+                                    <!--begin::Title-->
+                                    <div class="flex-shrink-0 me-5">
+                                        <span class="text-gray-800 fs-1 fw-bold">{{announce.title}}</span>
+                                    </div>
+                                    <!--end::Title-->
+                                </div>
+                                <!--end::Heading-->
+                                <!--begin::Items-->
+                                <div class="d-flex align-items-center flex-wrap d-grid gap-2">
+                                    <!--begin::Item-->
+                                    <div class="d-flex align-items-center me-5 me-xl-13">
+                                        <!--begin::Symbol-->
+                                        <div class="symbol symbol-30px symbol-circle me-3">
+                                        </div>
+                                        <!--end::Symbol-->
+                                        <!--begin::Info-->
+                                        <div class="m-0">
+                                            <span class="fw-semibold text-gray-400 d-block fs-8">Creator</span>
+                                            <a href="{% url 'announce_details' announce.id %}" class="fw-bold text-gray-800 text-hover-primary fs-7">{{announce.creator}}</a>
+                                        </div>
+                                        <!--end::Info-->
+                                    </div>
+                                    <!--end::Item-->
+                                    <!--begin::Item-->
+                                    <div class="d-flex align-items-center">
+                                        <!--begin::Symbol-->
+                                        <div class="symbol symbol-30px symbol-circle me-3">
+                                            <span class="symbol-label bg-success">
+                                                <!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
+                                                <span class="svg-icon svg-icon-5 svg-icon-white">
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor"></path>
+                                                        <path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor"></path>
+                                                    </svg>
+                                                </span>
+                                                <!--end::Svg Icon-->
+                                            </span>
+                                        </div>
+                                        <!--end::Symbol-->
+                                        <!--begin::Info-->
+                                        <div class="m-0">
+                                            <span class="fw-semibold text-gray-400 d-block fs-8">Pret</span>
+                                            <span class="fw-bold text-gray-800 fs-7">{{ announce.price }}</span>
+                                        </div>
+                                        <!--end::Info-->
+                                    </div>
+                                    <!--end::Item-->
+                                </div>
+                                <!--end::Items-->
+                            </div>
+                            <!--end::Header-->
+                            <!--begin::Body-->
+                            <div class="mb-6">
+                                <!--begin::Text-->
+                                <span class="fw-semibold text-gray-600 fs-6 mb-8 d-block">
+                                    <div>
+                                        <p><strong>{{announce.description}}</strong></p><br>
+                                        <p>Etajul: <strong>{{announce.floor}}</strong> </p>
+                                        <p>Judetul: <strong>{{announce.county}}</strong> </p>
+                                        <p>Localitatea: <strong>{{announce.location}}</strong></p>
+                                        <p>Data publicarii: <strong>{{announce.publish_date}}</strong></p>
+                                        <p>Nr. Telefon: <strong>{{announce.phone_number}}</strong></p>
+                                    </div>
+                                </span>
+                                <!--end::Text-->
+                                <!--begin::Stats-->
+                                <div class="d-flex">
+                                    <!--begin::Stat-->
+                                    <div class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4 me-6 mb-3">
+                                        <!--begin::Date-->
+                                        <span class="fs-6 text-gray-700 fw-bold">{{ announce.publish_date}}</span>
+                                        <!--end::Date-->
+                                        <!--begin::Label-->
+                                        <div class="fw-semibold text-gray-400">Due Date</div>
+                                        <!--end::Label-->
+                                    </div>
+                                    <!--end::Stat-->
+                                    <!--begin::Stat-->
+                                    <div class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4 mb-3">
+                                        <!--begin::Number-->
+                                        <span class="fs-6 text-gray-700 fw-bold">$
+                                        <span class="ms-n1 counted" data-kt-countup="true" data-kt-countup-value="284,900.00" data-kt-initialized="1">{{ announce.price}}</span></span>
+                                        <!--end::Number-->
+                                        <!--begin::Label-->
+                                        <div class="fw-semibold text-gray-400">Budget</div>
+                                        <!--end::Label-->
+                                    </div>
+                                    <!--end::Stat-->
+                                </div>
+                                <!--end::Stats-->
+                            </div>
+                            <!--end::Body-->
+                            <!--begin::Footer-->
+                            <div class="d-flex flex-stack mt-auto bd-highlight">
+                                <!--begin::Actions-->
+
+                                <a href="/metronic8/demo1/../demo1/apps/projects/project.html" class="text-primary opacity-75-hover fs-6 fw-semibold">
+                                    {% if request.user == announce.creator or request.user.is_superuser %}
+                                        <div class="card-actions">
+                                            <a class="btn btn-info" href="{% url 'update_announce' announce.id %}">Edit</a>
+                                            <a class="btn btn-danger" href="{% url 'delete_announce' announce.id %}">Delete</a>
+                                        </div>
+                                    {% endif %}
+                                </a>
+                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr095.svg-->
+                                <span class="svg-icon svg-icon-4 svg-icon-gray-800 ms-1">
+                                </span>
+                            </div>
+                                <!--end::Svg Icon-->
+                                <!--end::Actions-->
+
+                            <!--end::Footer-->
+                        </div>
+                        <!--end::Wrapper-->
+                    </div>
+                    <!--end::Col-->
                 </div>
-                {% if request.user == announce.creator or request.user.is_superuser %}
-                <div class="card-actions">
-                    <a class="button" href="{% url 'update_announce' announce.id %}">Edit</a>
-                    <a class="button" href="{% url 'delete_announce' announce.id %}">Delete</a>
-                </div>
-                {% endif %}
+            <!--end::Row-->
             </div>
+        <!--end::Body-->
         </div>
     </div>
-</section>
-
 {% endblock %}

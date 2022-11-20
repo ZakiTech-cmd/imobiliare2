@@ -1,3 +1,32 @@
-{% extends 'imobiliare/main.html' %}
+{% extends 'imobiliare/index.html' %}
+{% load django_tables2 %}
+{% load static %}
+{% block content%}
+<section>
+    <h1 class="section-title">{{announce.title}}</h1>
+    <div class="single-card">
+        <div class="card">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+  <div class="carousel-indicators">
+      {% for p in photos %}
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{forloop.counter0}}" class="{% if forloop.counter0 == 0 %} active {% endif %}" aria-current="true" aria-label="Slide 1"></button>
+      {% endfor %}
+  </div>
+  <div class="carousel-inner">
+      {% for p in photos %}
+    <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}">
+      <img src="{{p.image.url}}" class="d-block w-100" alt="...">
+    </div>
+      {% endfor %}
+            <div class="item-content">
+         {% render_table table %}
+            </div>
+        </div>
+    </div>
+</section>
 
-<p>Calculator de rate</p>
+{% endblock %}
+{# tutorial/templates/tutorial/people.html #}
+
+
+
